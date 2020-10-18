@@ -1,18 +1,15 @@
-# C++ Boilerplate
+# Human Obstacle Detector
 [![Build Status](https://travis-ci.org/kushagra7176/Human_Obstacle_Detector.svg?branch=master)](https://travis-ci.org/kushagra7176/Human_Obstacle_Detector)
 [![Coverage Status](https://coveralls.io/repos/github/kushagra7176/Human_Obstacle_Detector/badge.svg?branch=master)](https://coveralls.io/github/kushagra7176/Human_Obstacle_Detector?branch=master)
 ---
 
-## Overview
-
-Simple starter C++ project with:
-
-- cmake
-- googletest
+## Authors
+- Kushagra Agrawal
+- Kartik Venkat
 
 ## Standard install via command-line
 ```
-git clone --recursive https://github.com/dpiet/cpp-boilerplate
+git clone --recursive https://github.com/kushagra7176/Human_Obstacle_Detector
 cd <path to repository>
 mkdir build
 cd build
@@ -39,22 +36,22 @@ In your Eclipse workspace directory (or create a new one), checkout the repo (an
 ```
 mkdir -p ~/workspace
 cd ~/workspace
-git clone --recursive https://github.com/dpiet/cpp-boilerplate
+git clone --recursive https://github.com/kushagra7176/Human_Obstacle_Detector
 ```
 
-In your work directory, use cmake to create an Eclipse project for an [out-of-source build] of cpp-boilerplate
+In your work directory, use cmake to create an Eclipse project for an [out-of-source build] of Human_Obstacle_Detector
 
 ```
 cd ~/workspace
-mkdir -p boilerplate-eclipse
-cd boilerplate-eclipse
-cmake -G "Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_ECLIPSE_VERSION=4.7.0 -D CMAKE_CXX_COMPILER_ARG1=-std=c++14 ../cpp-boilerplate/
+mkdir -p HumanObstacleDetector
+cd HumanObstacleDetector
+cmake -G "Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_ECLIPSE_VERSION=4.7.0 -D CMAKE_CXX_COMPILER_ARG1=-std=c++14 ../Human_Obstacle_Detector/
 ```
 
 ## Import
 
 Open Eclipse, go to File -> Import -> General -> Existing Projects into Workspace -> 
-Select "boilerplate-eclipse" directory created previously as root directory -> Finish
+Select "HumanObstacleDetector" directory created previously as root directory -> Finish
 
 # Edit
 
@@ -63,7 +60,7 @@ Source files may be edited under the "[Source Directory]" label in the Project E
 
 ## Build
 
-To build the project, in Eclipse, unfold boilerplate-eclipse project in Project Explorer,
+To build the project, in Eclipse, unfold HumanObstacleDetector project in Project Explorer,
 unfold Build Targets, double click on "all" to build all projects.
 
 ## Run
