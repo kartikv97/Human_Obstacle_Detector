@@ -1,6 +1,7 @@
 # Human Obstacle Detector
 [![Build Status](https://travis-ci.org/kushagra7176/Human_Obstacle_Detector.svg?branch=master)](https://travis-ci.org/kushagra7176/Human_Obstacle_Detector)
 [![Coverage Status](https://coveralls.io/repos/github/kushagra7176/Human_Obstacle_Detector/badge.svg?branch=master)](https://coveralls.io/github/kushagra7176/Human_Obstacle_Detector?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/kushagra7176/Human_Obstacle_Detector/blob/master/LICENSE)
 ---
 
 ## Authors
