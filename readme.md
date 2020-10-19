@@ -8,6 +8,9 @@
 - Kushagra Agrawal
 - Kartik Venkat
 
+## AIP Document
+[https://img.shields.io/badge/AIP-Click%20Here-red](https://docs.google.com/spreadsheets/d/1zLw-v8QNDz0xUzbNKgPRX_UwlmFRW5TeJ5RUZ21CM4s/edit#gid=0)
+
 ## Standard install via command-line
 ```
 git clone --recursive https://github.com/kushagra7176/Human_Obstacle_Detector
