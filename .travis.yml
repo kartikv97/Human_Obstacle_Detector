@@ -48,14 +48,14 @@ install:
   - git clone https://github.com/opencv/opencv.git
   - git clone https://github.com/opencv/opencv_contrib.git
   - cd opencv
-  - git checkout 4.4.0
+  - git checkout 4.2.0
   - cd ..
   - cd opencv_contrib
-  - git checkout 4.4.0
+  - git checkout 4.2.0
   - cd ../opencv
   - mkdir build
   - cd build
-  - sudo cmake  -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules/ -D OPENCV_ENABLE_NONFREE=ON ..
+  - sudo cmake  -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=~/opencv/opencv_contrib/modules/ -D OPENCV_ENABLE_NONFREE=ON -D WITH_IPP=OFF ..
   - make -j$(nproc)
   - sudo make install
   - sudo /bin/bash -c 'echo "$repo/installation/OpencCV4-$cvVersion/lib" >> /etc/ld.so.conf.d/opencv.conf'
