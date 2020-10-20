@@ -12,6 +12,10 @@ Currently pursuing M.Eng in Robotics from University of Maryland, College Park.
 ## AIP Document
 [![AIP](https://img.shields.io/badge/AIP-Click%20Here-red)](https://docs.google.com/spreadsheets/d/1zLw-v8QNDz0xUzbNKgPRX_UwlmFRW5TeJ5RUZ21CM4s/edit#gid=0)
 
+## Video Submission
+[![Phase1](https://img.shields.io/badge/Phase1-Click%20Here-red)](https://drive.google.com/drive/folders/1g6_zxrTMXEDqJOSKTqIsP0zMl6BQq-Ac?usp=sharing)
+
+
 ## Overview
 The autonomous navigation of a robot or an agent in an environment or a scene is the most talked about problem in the autonomous industry nowadays. If an agent wants to navigate autonomously in an environment it should be able to detect and avoid all kinds of obstacles which come in its way. 
 
