@@ -26,7 +26,6 @@ before_install:
 
 install:
   - sudo apt-get install -y -qq lcov
-  - sudo apt-get update
   - sudo apt-get install build-essential cmake unzip pkg-config git \
     libjpeg-dev libpng-dev libtiff-dev \
     libavcodec-dev libavformat-dev libswscale-dev \
