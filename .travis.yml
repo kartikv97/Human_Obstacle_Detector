@@ -23,6 +23,7 @@ matrix:
 before_install:
   - pip install --user cpp-coveralls
   - sudo -H pip install --upgrade requests[security]
+  - sudo apt-get install --upgrade cmake
 
 install:
   - sudo apt-get install -y -qq lcov
