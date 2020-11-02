@@ -1,6 +1,6 @@
 # We need a decent ubuntu dist
 sudo: required
-dist: bionic
+dist: trusty
 
 # Modern cpp settings from
 #  http://genbattle.bitbucket.org/blog/2016/01/17/c++-travis-ci/
@@ -54,7 +54,11 @@ install:
   - mkdir opencv
   - cd opencv
   - git clone https://github.com/opencv/opencv.git
+  - git clone https://github.com/opencv/opencv_contrib.git
   - cd opencv
+  - git checkout 4.4.0
+  - cd ..
+  - cd opencv_contrib
   - git checkout 4.4.0
   - cd ../opencv
   - mkdir build
