@@ -31,7 +31,7 @@ before_install:
   - ./configure
   - make
   - sudo make install
-  - cd..
+  - cd ..
 
 
 install:
@@ -60,7 +60,7 @@ install:
   - sudo make install
   - sudo /bin/bash -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
   - sudo ldconfig
-  - cd../..
+  - cd ../..
 
 
 
