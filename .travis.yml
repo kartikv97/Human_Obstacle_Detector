@@ -31,7 +31,7 @@ before_install:
   - ./configure
   - make
   - sudo make install
-  - cd ~
+  - cd..
 
 
 install:
@@ -50,9 +50,6 @@ install:
   - sudo apt -y install libavresample-dev
   - sudo apt -y install x264 v4l-utils
 
-  - cd ~
-  - mkdir opencv
-  - cd opencv
   - git clone https://github.com/opencv/opencv.git
   - cd opencv
   - git checkout 4.4.0
@@ -63,7 +60,7 @@ install:
   - sudo make install
   - sudo /bin/bash -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
   - sudo ldconfig
-  - cd ~
+  - cd../..
 
 
 
