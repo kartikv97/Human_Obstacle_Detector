@@ -14,6 +14,7 @@ Currently pursuing M.Eng in Robotics from University of Maryland, College Park.
 
 ## Video Submission
 [![Phase1](https://img.shields.io/badge/Phase1-Click%20Here-red)](https://drive.google.com/drive/folders/1g6_zxrTMXEDqJOSKTqIsP0zMl6BQq-Ac?usp=sharing)
+[![Phase2](https://img.shields.io/badge/Phase2-Click%20Here-red)](https://drive.google.com/drive/folders/1xGAmPG-Q1KaeIRgmRHxzmrEk4wp_5rR7?usp=sharing)
 
 
 ## Overview
@@ -25,62 +26,12 @@ In this project we are developing a real time object detection and avoidance cla
 ```
 git clone --recursive https://github.com/kushagra7176/Human_Obstacle_Detector
 cd <path to repository>
+bash requirements.sh
 mkdir build
 cd build
 cmake ..
 make
 Run tests: ./test/cpp-test
-Run program: ./app/shell-app
+Run program: ./app/shell-app --image=../dog.jpg ( use --show_output if you want to display the output )
+                                                ( use --video=../pedestrians.mp4 to run demo on video )
 ```
-
-## Building for code coverage (for assignments beginning in Week 4)
-```
-sudo apt-get install lcov
-cmake -D COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug ../
-make
-make code_coverage
-```
-This generates a index.html page in the build/coverage sub-directory that can be viewed locally in a web browser.
-
-## Working with Eclipse IDE ##
-
-## Installation
-
-In your Eclipse workspace directory (or create a new one), checkout the repo (and submodules)
-```
-mkdir -p ~/workspace
-cd ~/workspace
-git clone --recursive https://github.com/kushagra7176/Human_Obstacle_Detector
-```
-
-In your work directory, use cmake to create an Eclipse project for an [out-of-source build] of Human_Obstacle_Detector
-
-```
-cd ~/workspace
-mkdir -p HumanObstacleDetector
-cd HumanObstacleDetector
-cmake -G "Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_ECLIPSE_VERSION=4.7.0 -D CMAKE_CXX_COMPILER_ARG1=-std=c++14 ../Human_Obstacle_Detector/
-```
-
-## Import
-
-Open Eclipse, go to File -> Import -> General -> Existing Projects into Workspace -> 
-Select "HumanObstacleDetector" directory created previously as root directory -> Finish
-
-# Edit
-
-Source files may be edited under the "[Source Directory]" label in the Project Explorer.
-
-
-## Build
-
-To build the project, in Eclipse, unfold HumanObstacleDetector project in Project Explorer,
-unfold Build Targets, double click on "all" to build all projects.
-
-## Run
-
-1. In Eclipse, right click on the HumanObstacleDetector in Project Explorer,
-select Run As -> Local C/C++ Application
-
-2. Choose the binaries to run (e.g. shell-app, cpp-test for unit testing)
-
