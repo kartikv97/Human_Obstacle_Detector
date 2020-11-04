@@ -341,7 +341,9 @@ void Yolo::humanDetection(cv::CommandLineParser parser,
       static const std::string kWinName = " Human/object detection in OpenCV";
       namedWindow(kWinName, cv::WINDOW_NORMAL);
       imshow(kWinName, frame);
-      cv::waitKey(3000);
+      if (parser.has("image")) {
+        cv::waitKey(3000);
+      }
     }
   }
 
