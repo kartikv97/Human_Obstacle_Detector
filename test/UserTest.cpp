@@ -18,7 +18,7 @@ const char* keys =
     "\n\t\t./object_detection_yolo.out --show_output}"
     "{image img        |<none>| input image   }"
     "{video vid       |<none>| input video   }"
-    "{show_output       |<none>| show output   }";
+    ;
 /**
  * @ brief Test case for getOutputWidth method of User class.
  */
@@ -48,21 +48,29 @@ TEST(checkGetterSetter, checkVideoPath) {
     EXPECT_EQ(user.getVideoPath(), "video");
 }
 /**
- * @ brief Test case for getDataType method of User class.
+ * @ brief Test case for processImage method of User class.
  */
-TEST(checkGetterSetter, checkgetDataType) {
-    int argc = 0;
-    const char *argv = "";
-    cv::CommandLineParser parser(argc, &argv, keys);
-    EXPECT_EQ(user.getDataType(parser), "Error");
+TEST(checkGetterSetter, processImage) {
+  std::string operation = "read";
+  cv::Mat frame;
+  cv::VideoCapture cap;
+  cap.open("../../dog.jpg");
+  user.setImagePath("../../dog.jpg");
+  cv::VideoCapture capture = user.processImage(operation,frame);
+
+  EXPECT_EQ(capture.get(cv::CAP_PROP_FRAME_WIDTH), cap.get(cv::CAP_PROP_FRAME_WIDTH));
 }
 /**
- * @ brief Test case for getDataPath method of User class.
+ * @ brief Test case for processVideo method of User class.
  */
-TEST(checkGetterSetter, checkgetDataPath) {
-    int argc = 0;
-    const char *argv = "";
-    cv::CommandLineParser parser(argc, &argv, keys);
-    std::string str = "val";
-    EXPECT_EQ(user.getDataPath(parser, str), "Error");
+TEST(checkGetterSetter, processVideo) {
+  std::string operation = "read";
+  cv::Mat frame1,frame2;
+  cv::VideoCapture cap;
+  cv::VideoWriter video;
+  cap.open("../../pedestrians.mp4");
+  user.setVideoPath("../../pedestrians.mp4");
+
+  cv::VideoCapture capture = user.processVideo(operation,frame1,video);
+  EXPECT_EQ(capture.get(cv::CAP_PROP_FRAME_WIDTH), cap.get(cv::CAP_PROP_FRAME_WIDTH));
 }
