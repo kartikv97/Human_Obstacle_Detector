@@ -99,7 +99,7 @@ class Yolo {
    * @param classes
    * @return None.
    */
-  void removeBox(cv::Mat& frame, const std::vector<cv::Mat>& outs ,float confThreshold, std::vector<std::string> classes);
+  void removeBox(cv::Mat& frame, const std::vector<cv::Mat>& outs ,float confThreshold, const std::vector<std::string>& classes);
   /*
    * @brief This function draws the bounding box around the object and adds text labels to the image.
    * @param classId

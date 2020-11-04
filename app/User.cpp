@@ -7,10 +7,14 @@
 #include <User.h>
 #include <Utils.h>
 #include <yolo.h>
+#include <utility>
+
+
+
 #include <fstream>
 #include <opencv2/opencv.hpp>
 #include <opencv2/dnn/dnn.hpp>
-#include <utility>
+
 
 /**
  * @brief  constructor for User class.
@@ -88,15 +92,13 @@ std::string User::getVideoPath() {
 * @return type std::string.
 */
 std::string User::getDataType(cv::CommandLineParser parser) {
-  if (parser.has("image") or parser.has("img")) {
+  if (parser.has("image") || parser.has("img")) {
     std::string inputType = "image";
     return inputType;
-  }
-  else if (parser.has("video") or parser.has("vid")) {
+  } else if (parser.has("video") || parser.has("vid")) {
     std::string inputType = "video";
-    return inputType ;
-  }
-  else {
+    return inputType;
+  } else {
     std::string Error = "Error";
     std::cout<< "invalid key specified\n";
     return Error;
@@ -108,19 +110,18 @@ std::string User::getDataType(cv::CommandLineParser parser) {
  * @param dataType
  * @return type std::string.
  */
-std::string User::getDataPath(cv::CommandLineParser parser, std::string dataType) {
-  if (parser.has("image") or parser.has("img")) {
+std::string User::getDataPath(const cv::CommandLineParser& parser,
+                              const std::string& dataType) {
+  if (parser.has("image") || parser.has("img")) {
     imagePath = parser.get<std::string>("image");
-
     return imagePath;
-  }
-  else if (parser.has("video") or parser.has("vid")) {
+  } else if (parser.has("video") || parser.has("vid")) {
     videoPath = parser.get<std::string>("video");
     return videoPath;
-  }
-  else {
+  } else {
     std::string Error = "Error";
-    std::cout<< "path to "<<dataType << " does not exist. Please enter a valid path.";
+    std::cout<< "path to " << dataType <<
+    " does not exist. Please enter a valid path.";
     return Error;
   }
 }
@@ -132,17 +133,16 @@ std::string User::getDataPath(cv::CommandLineParser parser, std::string dataType
 * @return type cv::VideoCapture.
 */
 
-cv::VideoCapture User::processImage(const std::string& operation,  cv::Mat frame ){
+cv::VideoCapture User::processImage(const std::string& operation,
+                                    cv::Mat frame ) {
   if (operation == "read") {
     cv::VideoCapture capture;
     capture.open(imagePath);
     return capture;
-  }
-
-  else if (operation == "write") {
+  } else if (operation == "write") {
     std::string outputPath = "../output/imageOutputs/OutputImage.jpg";
     cv::imwrite(outputPath, frame);
-    std::cout<<"images saved at "<<outputPath<<"\n";
+    std::cout<< "images saved at "<< outputPath<< "\n";
   }
 }
 /**
@@ -153,16 +153,15 @@ cv::VideoCapture User::processImage(const std::string& operation,  cv::Mat frame
 * @param video
 * @return type cv::VideoCapture.
 */
-cv::VideoCapture User::processVideo(std::string operation, cv::Mat frame ,cv::VideoWriter video){
+cv::VideoCapture User::processVideo(const std::string& operation,
+                                    cv::Mat frame , cv::VideoWriter video) {
   if (operation == "read") {
     cv::VideoCapture capture;
     capture.open(videoPath);
     return capture;
-  }
-
-  else if (operation == "write") {
+  } else if (operation == "write") {
     cv::Mat newFrame;
-    cv::resize(frame,newFrame,cv::Size(getOutputWidth(),getOutputHeight()));
+    cv::resize(frame, newFrame, cv::Size(getOutputWidth(), getOutputHeight()));
     video.write(newFrame);
   }
 }

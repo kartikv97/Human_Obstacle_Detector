@@ -4,7 +4,7 @@
  * @brief main function with demo implementation
  * @author Kartik Venkat and Kushagra Agrawal
  */
-
+#include <yolo.h>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -13,20 +13,20 @@
 #include <opencv2/highgui.hpp>
 #include <User.h>
 #include <Utils.h>
-#include <yolo.h>
+
 
 /*
  * @brief This gets displayed if the help parameter is
  * passed as an argument.
  */
 const char* keys =
-    "{help h usage ? | | Usage examples: \n\t\t./object_detection_yolo.out --image=dog.jpg "
+    "{help h usage ? | | Usage examples: "
+    "\n\t\t./object_detection_yolo.out --image=dog.jpg "
     "\n\t\t./object_detection_yolo.out --video=run_sm.mp4"
     "\n\t\t./object_detection_yolo.out --show_output}"
     "{image img        |<none>| input image   }"
     "{video vid       |<none>| input video   }"
-    "{show_output       |<none>| show output   }"
-;
+    "{show_output       |<none>| show output   }";
 
 
 /*
@@ -35,8 +35,7 @@ const char* keys =
  * @param argv
  * return type int
  */
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
   /*
    * @brief create objects of each class.
    */
@@ -45,19 +44,17 @@ int main(int argc, char** argv)
   Utils utils;
 
   cv::CommandLineParser parser(argc, argv, keys);
-  parser.about("Use this script to run object detection using YOLO3 in OpenCV.");
+  parser.about("Use this script to run object "
+               "detection using YOLO3 in OpenCV.");
 
-  if (parser.has("help"))
-  {
+  if (parser.has("help")) {
     parser.printMessage();
     return 0;
   }
-
   /*
    * @brief Run the DEMO algorithm.
    */
   yolo.humanDetection(parser, user, yolo, utils);
-
   return 0;
 }
 

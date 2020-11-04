@@ -100,7 +100,7 @@ class User{
   * @param dataType
   * @return type std::string.
   */
-  std::string getDataPath(cv::CommandLineParser parser, std::string dataType);
+  std::string getDataPath(const cv::CommandLineParser& parser, const std::string& dataType);
   /**
   * @brief This function is responsible to handle all
   * image read/write operations
@@ -117,7 +117,7 @@ class User{
   * @param video
   * @return type cv::VideoCapture.
   */
-  cv::VideoCapture processVideo(std::string operation, cv::Mat frame,cv::VideoWriter video);
+  cv::VideoCapture processVideo(const std::string& operation, cv::Mat frame,cv::VideoWriter video);
 };
 
 

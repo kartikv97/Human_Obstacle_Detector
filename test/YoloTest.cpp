@@ -7,7 +7,8 @@
  */
 
 #include <gtest/gtest.h>
-#include "yolo.h"
+#include <yolo.h>
+#include <Utils.h>
 
 Yolo yolo;
 Utils utils;
@@ -61,7 +62,7 @@ TEST(checkYolo, checkDrawBox) {
     cv::Mat frame = cv::imread("../dog.jpg", 0);
     int rows = frame.rows;
     int cols = frame.cols;
-    yolo.drawBox(0, 99.0, 0, 0, 5, 5, frame,classes);
+    yolo.drawBox(0, 99.0, 0, 0, 5, 5, frame, classes);
     EXPECT_EQ(frame.rows, rows);
     EXPECT_EQ(frame.cols, cols);
 }

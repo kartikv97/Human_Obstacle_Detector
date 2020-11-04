@@ -1,6 +1,6 @@
 /**
  * @copyright  MIT License (c) 2020 Kushagra Agrawal and Kartik Venkat
- * @file  Utils.h
+ * @file  Utils.cpp
  * @brief Utils Class implementation
  * @author Kushagra Agrawal and Kartik Venkat
  */
@@ -15,17 +15,13 @@
 /**
  * @brief Constructor for the Utils class.
  */
-Utils::Utils(){
-    classesFile = "../coco.names";
-    modelConfigurationFile = "../yolov3.cfg";
-    modelWeightsFile = "../yolov3.weights";
-}
+Utils::Utils()= default;
 /**
  * @brief It sets the Classes value.
  * @param ClassesValue
  * @return None
  */
-void Utils::setClassesFile(const std::string classesValue) {
+void Utils::setClassesFile(const std::string& classesValue) {
     classesFile = classesValue;
 }
 /**
@@ -41,7 +37,7 @@ std::string Utils::getClassesFile() {
  * @param ModelConfigurationValue
  * @return None
  */
-void Utils::setModelConfiguration(const std::string modelConfiguration) {
+void Utils::setModelConfiguration(const std::string& modelConfiguration) {
     modelConfigurationFile = modelConfiguration;
 }
 /**
@@ -57,7 +53,7 @@ std::string Utils::getModelConfiguration() {
  * @param ModelWeightsValue
  * @return None
  */
-void Utils::setWeights(const std::string modelWeights) {
+void Utils::setWeights(const std::string& modelWeights) {
     modelWeightsFile = modelWeights;
 }
 /**
@@ -91,5 +87,4 @@ std::vector<std::string> Utils::getClasses() {
  * @brief Destructor for Utils Class.
  */
 Utils::~Utils() {
-
 }

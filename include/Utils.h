@@ -21,17 +21,18 @@ private:
     /**
      * @brief private variable for ClassesFile.
      */
-    std::string classesFile;
+    std::string classesFile="../coco.names";
 
     /**
      * @brief private variable for ModelConfigurationFile.
      */
-    std::string modelConfigurationFile;
+    std::string modelConfigurationFile = "../yolov3.cfg";
+
 
     /**
      * @brief private variable for ModelWeightsFile.
      */
-    std::string modelWeightsFile;
+    std::string modelWeightsFile = "../yolov3.weights";
 
 public:
     /**
@@ -51,7 +52,7 @@ public:
      * @param ClassesValue (It is the path for the classes file.)
      * @return void.
      */
-    void setClassesFile(const std::string
+    void setClassesFile(const std::string&
                         classesValue);
 
     /**
@@ -66,7 +67,7 @@ public:
      * @param ModelConfigurationValue (It is the file containing Yolov3 model configuration.)
      * @return void.
      */
-    void setModelConfiguration(const std::string modelConfiguration);
+    void setModelConfiguration(const std::string& modelConfiguration);
 
     /**
      * @brief It returns the ModelWeights value.
@@ -80,7 +81,7 @@ public:
      * @param ModelWeightsValue (It is the file containing yolov3 weights.)
      * @return void.
      */
-    void setWeights(const std::string modelWeights);
+    void setWeights(const std::string& modelWeights);
 
     /**
      * @brief It adds classes in std::vector<std::string>.

@@ -4,21 +4,22 @@
  * @brief Yolo Class implementation
  * @author Kartik Venkat and Kushagra Agrawal
  */
+#include <yolo.h>
 #include <iostream>
-
+#include <User.h>
+#include <Utils.h>
+#include <vector>
 
 #include <opencv2/dnn.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
-#include <User.h>
-#include <Utils.h>
-#include <yolo.h>
-#include <vector>
+
+
 
 /**
  * @brief  constructor for Yolo class.
  */
-Yolo::Yolo(){
+Yolo::Yolo() {
   inputHeight = 416;
   inputWidth = 416;
   configurationThreshold = 0.5;
@@ -107,37 +108,34 @@ float Yolo::getNmsThreshold() {
  * @return None.
  */
 void Yolo::removeBox(cv::Mat& frame, const std::vector<cv::Mat>& outs
-    ,float confThreshold, std::vector<std::string> classes) {
+    , float confThreshold, const std::vector<std::string>& classes) {
   std::vector<int> classIds;
   std::vector<float> confidences;
   std::vector<cv::Rect> boxes;
 
-  for (const auto & out : outs)
-  {
+  for (const auto & out : outs) {
     /* @brief Scan through all the bounding boxes output from the network and keep only the
      * ones with high confidence scores. Assign the box's class label as the class
      * with the highest score for the box.
      */
     auto* data = (float*)out.data;
-    for (int j = 0; j < out.rows; ++j, data += out.cols)
-    {
+    for (int j = 0; j < out.rows; ++j, data += out.cols) {
       cv::Mat scores = out.row(j).colRange(5, out.cols);
       cv::Point classIdPoint;
       double confidence;
 
       // Get the value and location of the maximum score
       minMaxLoc(scores, nullptr, &confidence, nullptr, &classIdPoint);
-      if (confidence > confThreshold)
-      {
-        int centerX = (int)(data[0] * frame.cols);
-        int centerY = (int)(data[1] * frame.rows);
-        int width = (int)(data[2] * frame.cols);
-        int height = (int)(data[3] * frame.rows);
+      if (confidence > confThreshold) {
+        int centerX = static_cast<int>(data[0] * frame.cols);
+        int centerY = static_cast<int>(data[1] * frame.rows);
+        int width = static_cast<int>(data[2] * frame.cols);
+        int height = static_cast<int>(data[3] * frame.rows);
         int left = centerX - width / 2;
         int top = centerY - height / 2;
 
         classIds.push_back(classIdPoint.x);
-        confidences.push_back((float)confidence);
+        confidences.push_back(static_cast<float>confidence);
         boxes.emplace_back(left, top, width, height);
       }
     }
@@ -148,8 +146,7 @@ void Yolo::removeBox(cv::Mat& frame, const std::vector<cv::Mat>& outs
    */
   std::vector<int> indices;
   cv::dnn::NMSBoxes(boxes, confidences, confThreshold, nmsThreshold, indices);
-  for (int idx : indices)
-  {
+  for (int idx : indices) {
     cv::Rect box = boxes[idx];
     /* @brief Draw bounding box for each detected object.
      */
@@ -164,14 +161,13 @@ void Yolo::removeBox(cv::Mat& frame, const std::vector<cv::Mat>& outs
  * @return type std::vector<std::string>
  */
 std::vector<std::string> Yolo::getOutputNames(const cv::dnn::Net& net) {
-
   static std::vector<cv::String> names;
-  if (names.empty())
-  {
-    //Get the indices of the output layers, i.e. the layers with unconnected outputs
+  if (names.empty()) {
+    // Get the indices of the output layers, i.e. the layers
+    // with unconnected outputs
     std::vector<int> outLayers = net.getUnconnectedOutLayers();
 
-    //get the names of all the layers in the network
+    // get the names of all the layers in the network
     std::vector<cv::String> layersNames = net.getLayerNames();
 
     // Get the names of the output layers in names
@@ -193,26 +189,29 @@ std::vector<std::string> Yolo::getOutputNames(const cv::dnn::Net& net) {
  * @param classes
  * @return None
  */
-void Yolo::drawBox(int classId, float conf, int left, int top, int right, int bottom, cv::Mat &frame, std::vector<std::string> classes) {
-
-  //Draw a rectangle displaying the bounding box
-  rectangle(frame, cv::Point(left, top), cv::Point(right, bottom), cv::Scalar(255, 178, 50), 3);
-
-  //Get the label for the class name and its confidence
+void Yolo::drawBox(int classId, float conf, int left, int top,
+                   int right, int bottom, cv::Mat &frame,
+                   std::vector<std::string> classes) {
+  // Draw a rectangle displaying the bounding box
+  rectangle(frame, cv::Point(left, top),
+            cv::Point(right, bottom),
+            cv::Scalar(255, 178, 50), 3);
+  // Get the label for the class name and its confidence
   std::string label = cv::format("%.2f", conf);
-  if (!classes.empty())
-  {
-    CV_Assert(classId < (int)classes.size());
+  if (!classes.empty()) {
+    CV_Assert(classId < static_cast<int>(classes.size()));
     label = classes[classId] + ":" + label;
   }
-
-  //Display the label at the top of the bounding box
+  // Display the label at the top of the bounding box
   int baseLine;
-  cv::Size labelSize = getTextSize(label, cv::FONT_HERSHEY_SIMPLEX, 0.5, 1, &baseLine);
+  cv::Size labelSize = getTextSize(label, cv::FONT_HERSHEY_SIMPLEX,
+                                   0.5, 1, &baseLine);
   top = std::max(top, labelSize.height);
-  rectangle(frame, cv::Point(left, top - round(1.5*labelSize.height)), cv::Point(left + round(1.5*labelSize.width), top + baseLine), cv::Scalar(255, 255, 255), cv::FILLED);
-  putText(frame, label, cv::Point(left, top), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(0,0,0),1);
-
+  rectangle(frame, cv::Point(left, top - round(1.5*labelSize.height)),
+            cv::Point(left + round(1.5*labelSize.width), top + baseLine),
+            cv::Scalar(255, 255, 255), cv::FILLED);
+  putText(frame, label, cv::Point(left, top), cv::FONT_HERSHEY_SIMPLEX,
+          0.75, cv::Scalar(0, 0, 0), 1);
 }
 
 /*
@@ -224,14 +223,17 @@ void Yolo::drawBox(int classId, float conf, int left, int top, int right, int bo
  * @param yolo
  * @param utils
  */
-void Yolo::humanDetection(cv::CommandLineParser parser, User user, Yolo yolo, Utils utils) {
+void Yolo::humanDetection(cv::CommandLineParser parser,
+                          User user, Yolo yolo,
+                          Utils utils) {
   std::vector<std::string> classes;
 
   // Load names of classes
   classes = utils.getClasses();
 
   // Load the network
-  cv::dnn::Net net = cv::dnn::readNetFromDarknet(utils.getModelConfiguration(), utils.getWeights());
+  cv::dnn::Net net = cv::dnn::readNetFromDarknet(utils.getModelConfiguration(),
+                                                 utils.getWeights());
   net.setPreferableBackend(cv::dnn::DNN_BACKEND_OPENCV);
   net.setPreferableTarget(cv::dnn::DNN_TARGET_CPU);
 
@@ -245,36 +247,32 @@ void Yolo::humanDetection(cv::CommandLineParser parser, User user, Yolo yolo, Ut
    */
   try {
     std::string dataType = user.getDataType(parser);
-    std::string dataPath = user.getDataPath(parser,dataType);
+    std::string dataPath = user.getDataPath(parser, dataType);
     if (dataType == "image") {
       user.setImagePath(dataPath);
       cap = user.processImage("read", frame);
     }
-
-    if (dataType == "video"){
+    if (dataType == "video") {
       user.setVideoPath(dataPath);
       cap = user.processVideo("read", frame, video);
       user.setOutputWidth(cap.get(cv::CAP_PROP_FRAME_WIDTH));
       user.setOutputHeight(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
     }
-
   }
   catch (...) {
     std::cout << "Could not open the input image/video stream" << std::endl;
   }
-
-
   /* @brief Create an instance of video writer with initial parameters.
    */
   if (parser.has("video")) {
     video.open("../output/videoOutputs/OutputVideo.avi",
                cv::VideoWriter::fourcc('M', 'J', 'P', 'G'),
-               24, cv::Size(user.getOutputWidth(), user.getOutputHeight()), true);
+               24, cv::Size(user.getOutputWidth(),
+                            user.getOutputHeight()), true);
   }
   /* Process each frame.
    */
-  while (cv::waitKey(1) < 0)
-  {
+  while (cv::waitKey(1) < 0) {
     /* @brief Get frame from the video/image
      */
     cap >> frame;
@@ -283,7 +281,8 @@ void Yolo::humanDetection(cv::CommandLineParser parser, User user, Yolo yolo, Ut
      */
     if (frame.empty()) {
       std::cout << "Done processing !!!" << std::endl;
-      std::cout << "Output file is stored in the output folder " << outputFile << std::endl;
+      std::cout << "Output file is stored in the output folder "
+      << outputFile << std::endl;
       cap.release();
       video.release();
       cv::waitKey(3000);
@@ -292,7 +291,11 @@ void Yolo::humanDetection(cv::CommandLineParser parser, User user, Yolo yolo, Ut
 
     /* @brief Create a 4D blob from a frame.
     */
-    cv::dnn::blobFromImage(frame, blob, 1/255.0, cv::Size(getInputWidth(), getInputHeight()), cv::Scalar(0,0,0), true, false);
+    cv::dnn::blobFromImage(frame, blob, 1/255.0,
+                           cv::Size(getInputWidth(),
+                                    getInputHeight()),
+                                    cv::Scalar(0, 0, 0),
+                                    true, false);
 
     /* @brief Sets the input to the network
      */
@@ -326,12 +329,12 @@ void Yolo::humanDetection(cv::CommandLineParser parser, User user, Yolo yolo, Ut
     if (parser.has("image"))
       user.processImage("write", frame);
 
-    if (parser.has("video")){
+    if (parser.has("video")) {
       user.setOutputWidth(frame.size().width);
       user.setOutputHeight(frame.size().height);
       user.processVideo("write", frame, video);
     }
-    if (parser.has("show_output")){
+    if (parser.has("show_output")) {
       /* @brief Create a window to display the output
        */
       static const std::string kWinName = " Human/object detection in OpenCV";
@@ -343,5 +346,4 @@ void Yolo::humanDetection(cv::CommandLineParser parser, User user, Yolo yolo, Ut
   cap.release();
   video.release();
   if (!parser.has("image")) video.release();
-
 }
