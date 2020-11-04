@@ -57,7 +57,6 @@ TEST(checkGetterSetter, processImage) {
   cap.open("../../dog.jpg");
   user.setImagePath("../../dog.jpg");
   cv::VideoCapture capture = user.processImage(operation,frame);
-
   EXPECT_EQ(capture.get(cv::CAP_PROP_FRAME_WIDTH), cap.get(cv::CAP_PROP_FRAME_WIDTH));
 }
 /**
@@ -70,7 +69,6 @@ TEST(checkGetterSetter, processVideo) {
   cv::VideoWriter video;
   cap.open("../../pedestrians.mp4");
   user.setVideoPath("../../pedestrians.mp4");
-
   cv::VideoCapture capture = user.processVideo(operation,frame1,video);
   EXPECT_EQ(capture.get(cv::CAP_PROP_FRAME_WIDTH), cap.get(cv::CAP_PROP_FRAME_WIDTH));
 }
