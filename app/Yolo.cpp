@@ -135,7 +135,7 @@ void Yolo::removeBox(cv::Mat& frame, const std::vector<cv::Mat>& outs
         int top = centerY - height / 2;
 
         classIds.push_back(classIdPoint.x);
-        confidences.push_back(static_cast<float>confidence);
+        confidences.push_back(static_cast<float>(confidence));
         boxes.emplace_back(left, top, width, height);
       }
     }
