@@ -66,6 +66,7 @@ install:
 
 
 script:
+  - sudo bash requiremnts.sh
   - export CXX=$COMPILER;
   - mkdir main_build
   - cd main_build
