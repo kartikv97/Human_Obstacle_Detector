@@ -47,22 +47,4 @@ TEST(checkGetterSetter, checkVideoPath) {
     user.setVideoPath("video");
     EXPECT_EQ(user.getVideoPath(), "video");
 }
-/**
- * @ brief Test case for getDataType method of User class.
- */
-TEST(checkGetterSetter, checkgetDataType) {
-    int argc = 0;
-    const char *argv = "";
-    cv::CommandLineParser parser(argc, &argv, keys);
-    EXPECT_EQ(user.getDataType(parser), "Error");
-}
-/**
- * @ brief Test case for getDataPath method of User class.
- */
-TEST(checkGetterSetter, checkgetDataPath) {
-    int argc = 0;
-    const char *argv = "";
-    cv::CommandLineParser parser(argc, &argv, keys);
-    std::string str = "val";
-    EXPECT_EQ(user.getDataPath(parser, str), "Error");
-}
+
