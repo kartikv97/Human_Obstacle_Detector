@@ -229,6 +229,7 @@ void Yolo::humanDetection(cv::CommandLineParser parser,
   std::vector<std::string> classes;
 
   // Load names of classes
+  utils.setClasses();
   classes = utils.getClasses();
 
   // Load the network
@@ -340,6 +341,7 @@ void Yolo::humanDetection(cv::CommandLineParser parser,
       static const std::string kWinName = " Human/object detection in OpenCV";
       namedWindow(kWinName, cv::WINDOW_NORMAL);
       imshow(kWinName, frame);
+      cv::waitKey(3000);
     }
   }
 
