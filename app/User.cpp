@@ -92,10 +92,10 @@ std::string User::getVideoPath() {
 * @return type std::string.
 */
 std::string User::getDataType(cv::CommandLineParser parser) {
-  if (parser.has("image") or parser.has("img")) {
+  if (parser.has("image") || parser.has("img")) {
     std::string inputType = "image";
     return inputType;
-  } else if (parser.has("video")or parser.has("vid")) {
+  } else if (parser.has("video")|| parser.has("vid")) {
     std::string inputType = "video";
     return inputType;
   } else {
