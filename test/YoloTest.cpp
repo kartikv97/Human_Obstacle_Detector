@@ -10,9 +10,21 @@
 #include <yolo.h>
 #include <Utils.h>
 
+
 Yolo yolo;
 Utils utils;
+
 double val = 2;
+
+
+const char* keys1 =
+    "{help h usage ? | | Usage examples: "
+    "\n\t\t./object_detection_yolo.out --image=dog.jpg "
+    "\n\t\t./object_detection_yolo.out --video=run_sm.mp4"
+    "\n\t\t./object_detection_yolo.out --show_output}"
+    "{image img        | ../../dog.jpg | input image   }"
+    "{video vid       |<none>| input video   }"
+    "{show_output       |true| show output   }";
 
 /**
  * @brief Test case for setConfigurtionThreshold method of YOLOv3 class. The
@@ -66,4 +78,24 @@ TEST(checkYolo, checkDrawBox) {
     EXPECT_EQ(frame.rows, rows);
     EXPECT_EQ(frame.cols, cols);
 }
-
+/**
+ * @brief Test case for humanDetection method of Yolo class.
+ */
+TEST(checkYolo, humanDetection) {
+  cv::Mat blob;
+  utils.setClasses();
+  std::vector<std::string> classes = utils.getClasses();
+  // Load the network
+  cv::dnn::Net net = cv::dnn::readNetFromDarknet(utils.getModelConfiguration(),
+                                                 utils.getWeights());
+  cv::Mat frame = cv::imread("../../dog.jpg");
+  cv::dnn::blobFromImage(frame,  blob, 1/255.0,
+                         cv::Size(416,
+                                  416),
+                         cv::Scalar(0, 0, 0),
+                         true, false);
+  net.setInput(blob);
+  std::vector<cv::Mat> outs;
+  net.forward(outs, yolo.getOutputNames(net));
+  EXPECT_NO_FATAL_FAILURE(yolo.removeBox(frame, outs, 0.5, classes));
+}
