@@ -164,6 +164,7 @@ cv::VideoCapture User::processVideo(const std::string& operation,
     cv::Mat newFrame;
     cv::resize(frame, newFrame, cv::Size(getOutputWidth(), getOutputHeight()));
     video.write(newFrame);
+    return cv::VideoCapture();
   }
 }
 
