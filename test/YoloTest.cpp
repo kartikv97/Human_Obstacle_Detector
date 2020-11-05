@@ -28,7 +28,7 @@ const char* keys1 =
     "{show_output       |<none>| show output   }";
 const char* keys4 =
     "{image img        |<none>| input image   }"
-    "{video vid       |../pedestrians.mp4| input video   }"
+    "{video vid       |../dog.jpg| input video   }"
     "{show_output       |<none>| show output   }";
 
 /**
