@@ -13,12 +13,14 @@ double vals = 2;
 User user;
 
 const char* keys =
-    "{help h usage ? | | Usage examples: \n\t\t./object_detection_yolo.out "
-    "--image=dog.jpg \n\t\t./object_detection_yolo.out --video=run_sm.mp4}"
+    "{help h usage ? | | Usage examples: "
+    "\n\t\t./object_detection_yolo.out --image=dog.jpg "
+    "\n\t\t./object_detection_yolo.out --video=run_sm.mp4"
     "\n\t\t./object_detection_yolo.out --show_output}"
     "{image img        |<none>| input image   }"
     "{video vid       |<none>| input video   }"
-    ;
+    "{show_output       |<none>| show output   }";
+
 /**
  * @ brief Test case for getOutputWidth method of User class.
  */
@@ -47,6 +49,26 @@ TEST(checkGetterSetter, checkVideoPath) {
     user.setVideoPath("video");
     EXPECT_EQ(user.getVideoPath(), "video");
 }
+/**
+ * @ brief Test case for getDataType method of User class.
+ */
+TEST(checkGetterSetter, checkgetDataType) {
+    int argc = 0;
+    const char *argv = "";
+    cv::CommandLineParser parser(argc, &argv, keys);
+    EXPECT_EQ(user.getDataType(parser),"Error");
+}
+/**
+ * @ brief Test case for getDataPath method of User class.
+ */
+TEST(checkGetterSetter, checkgetDataPath) {
+    int argc = 0;
+    const char *argv = "";
+    cv::CommandLineParser parser(argc, &argv, keys);
+    std::string str = "val";
+    EXPECT_EQ(user.getDataPath(parser, str),"Error");
+}
+
 /**
  * @ brief Test case for processImage method of User class.
  */
