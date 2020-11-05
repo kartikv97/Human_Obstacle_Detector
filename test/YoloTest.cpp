@@ -115,7 +115,7 @@ TEST(checkYolo, humanDetectionAlgo) {
   yolo.setInputHeight(416);
   yolo.setInputWidth(416);
   yolo.setNmsThreshold(0.4);
-  EXPECT_NO_FATAL_FAILURE(yolo.humanDetection(parser,User,yolo,utils));
+  EXPECT_NO_FATAL_FAILURE(yolo.humanDetection(parser, User, yolo, utils));
 }
 /**
  * @brief Test case for humanDetection method of Yolo class.
@@ -128,5 +128,5 @@ TEST(checkYolo, humanDetectionAlgo2) {
   yolo.setInputHeight(416);
   yolo.setInputWidth(416);
   yolo.setNmsThreshold(0.4);
-  EXPECT_NO_FATAL_FAILURE(yolo.humanDetection(parser,User,yolo,utils));
+  EXPECT_NO_FATAL_FAILURE(yolo.humanDetection(parser, User, yolo, utils));
 }
