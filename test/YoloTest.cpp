@@ -9,10 +9,11 @@
 #include <gtest/gtest.h>
 #include <yolo.h>
 #include <Utils.h>
-
+#include <User.h>
 
 Yolo yolo;
 Utils utils;
+User User;
 
 double val = 2;
 
@@ -22,9 +23,13 @@ const char* keys1 =
     "\n\t\t./object_detection_yolo.out --image=dog.jpg "
     "\n\t\t./object_detection_yolo.out --video=run_sm.mp4"
     "\n\t\t./object_detection_yolo.out --show_output}"
-    "{image img        | ../../dog.jpg | input image   }"
+    "{image img        | ../dog.jpg | input image   }"
     "{video vid       |<none>| input video   }"
     "{show_output       |true| show output   }";
+const char* keys4 =
+    "{image img        |<none>| input image   }"
+    "{video vid       |../pedestrians.mp4| input video   }"
+    "{show_output       |<none>| show output   }";
 
 /**
  * @brief Test case for setConfigurtionThreshold method of YOLOv3 class. The
@@ -88,7 +93,7 @@ TEST(checkYolo, humanDetection) {
   // Load the network
   cv::dnn::Net net = cv::dnn::readNetFromDarknet(utils.getModelConfiguration(),
                                                  utils.getWeights());
-  cv::Mat frame = cv::imread("../../dog.jpg");
+  cv::Mat frame = cv::imread("../dog.jpg");
   cv::dnn::blobFromImage(frame,  blob, 1/255.0,
                          cv::Size(416,
                                   416),
@@ -98,4 +103,30 @@ TEST(checkYolo, humanDetection) {
   std::vector<cv::Mat> outs;
   net.forward(outs, yolo.getOutputNames(net));
   EXPECT_NO_FATAL_FAILURE(yolo.removeBox(frame, outs, 0.5, classes));
+}
+/**
+ * @brief Test case for humanDetection method of Yolo class.
+ */
+TEST(checkYolo, humanDetectionAlgo) {
+  int argc = 0;
+  const char *argv = "";
+  cv::CommandLineParser parser(argc, &argv, keys1);
+  yolo.setConfigurationThreshold(0.5);
+  yolo.setInputHeight(416);
+  yolo.setInputWidth(416);
+  yolo.setNmsThreshold(0.4);
+  EXPECT_NO_FATAL_FAILURE(yolo.humanDetection(parser,User,yolo,utils));
+}
+/**
+ * @brief Test case for humanDetection method of Yolo class.
+ */
+TEST(checkYolo, humanDetectionAlgo2) {
+  int argc = 0;
+  const char *argv = "";
+  cv::CommandLineParser parser(argc, &argv, keys4);
+  yolo.setConfigurationThreshold(0.5);
+  yolo.setInputHeight(416);
+  yolo.setInputWidth(416);
+  yolo.setNmsThreshold(0.4);
+  EXPECT_NO_FATAL_FAILURE(yolo.humanDetection(parser,User,yolo,utils));
 }
