@@ -25,7 +25,7 @@ const char* keys1 =
     "\n\t\t./object_detection_yolo.out --show_output}"
     "{image img        | ../dog.jpg | input image   }"
     "{video vid       |<none>| input video   }"
-    "{show_output       |true| show output   }";
+    "{show_output       |<none>| show output   }";
 const char* keys4 =
     "{image img        |<none>| input image   }"
     "{video vid       |../pedestrians.mp4| input video   }"
