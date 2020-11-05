@@ -21,18 +21,18 @@ private:
     /**
      * @brief private variable for ClassesFile.
      */
-    std::string classesFile="../../coco.names";
+    std::string classesFile="../coco.names";
 
     /**
      * @brief private variable for ModelConfigurationFile.
      */
-    std::string modelConfigurationFile = "../../yolov4.cfg";
+    std::string modelConfigurationFile = "../yolov4.cfg";
 
 
     /**
      * @brief private variable for ModelWeightsFile.
      */
-    std::string modelWeightsFile = "../../yolov4.weights";
+    std::string modelWeightsFile = "../yolov4.weights";
 
 public:
     /**
