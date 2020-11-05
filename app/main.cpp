@@ -24,9 +24,9 @@ const char* keys =
     "\n\t\t./object_detection_yolo.out --image=dog.jpg "
     "\n\t\t./object_detection_yolo.out --video=run_sm.mp4"
     "\n\t\t./object_detection_yolo.out --show_output}"
-    "{image img        |<none>| input image   }"
+    "{image img        | ../dog.jpg | input image   }"
     "{video vid       |<none>| input video   }"
-    "{show_output       |<none>| show output   }";
+    "{show_output       |true| show output   }";
 
 
 /*
