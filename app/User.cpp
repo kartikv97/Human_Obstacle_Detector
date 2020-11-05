@@ -92,10 +92,10 @@ std::string User::getVideoPath() {
 * @return type std::string.
 */
 std::string User::getDataType(cv::CommandLineParser parser) {
-  if (parser.has("image") || parser.has("img")) {
+  if (parser.has("image") or parser.has("img")) {
     std::string inputType = "image";
     return inputType;
-  } else if (parser.has("video") || parser.has("vid")) {
+  } else if (parser.has("video")or parser.has("vid")) {
     std::string inputType = "video";
     return inputType;
   } else {
@@ -121,7 +121,7 @@ std::string User::getDataPath(const cv::CommandLineParser& parser,
   } else {
     std::string Error = "Error";
     std::cout<< "path to " << dataType <<
-    " does not exist. Please enter a valid path.";
+    " does not exist. Please enter a valid path.\n";
     return Error;
   }
 }
@@ -143,6 +143,7 @@ cv::VideoCapture User::processImage(const std::string& operation,
     std::string outputPath = "../output/imageOutputs/OutputImage.jpg";
     cv::imwrite(outputPath, frame);
     std::cout<< "images saved at "<< outputPath<< "\n";
+    return cv::VideoCapture();
   }
 }
 /**
