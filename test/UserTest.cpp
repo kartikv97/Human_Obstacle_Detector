@@ -142,7 +142,7 @@ TEST(checkGetterSetter, processVideoWrite) {
   cv::Mat frame1,frame2;
   cv::VideoCapture cap;
   cv::VideoWriter video;
-  cv::Mat frame = cv::imread("../dog.jpg");
+  cv::Mat frame = cv::imread("../pedestrians.mp4");
   EXPECT_NO_FATAL_FAILURE(user.processVideo(operation,frame,video));
 }
 /**
