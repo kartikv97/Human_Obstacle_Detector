@@ -142,6 +142,6 @@ def FlagsForFile( filename, **kwargs ):
 
   return {
     'flags': final_flags,
-    'do_cache': False
+    'do_cache': True
   }
 
